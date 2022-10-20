@@ -1,44 +1,199 @@
 <template>
   <div class="navigation" v-if="!userStore.loadingSession">
     <ul>
-      <li class="list" v-if="userStore.userData">
+      <li
+        class="list"
+        :class="{ active: navbar.actualPath === 'home' }"
+        v-if="userStore.userData"
+      >
         <router-link to="/">
-          <span class="icon">  <font-awesome-icon icon="fa-solid fa-house" /> </span>
-          <span class="list">Home</span>
+          <span class="icon">
+            <font-awesome-icon icon="fa-solid fa-house" class="icon-icon" />
+          </span>
+          <span class="title">Home</span>
         </router-link>
       </li>
-      <li class="list" v-if="!userStore.userData">
+      <li
+        class="list"
+        :class="{ active: navbar.actualPath === 'login' }"
+        v-if="!userStore.userData"
+      >
         <router-link to="/login">
-          <span class="icon"><font-awesome-icon icon="fa-solid fa-right-from-bracket" /></span>
-          <span class="list">Login</span>
+          <span class="icon"
+            ><font-awesome-icon
+              icon="fa-solid fa-right-from-bracket"
+              class="icon-icon"
+          /></span>
+          <span class="title">Login</span>
         </router-link>
       </li>
-      <li class="list" v-if="!userStore.userData">
+      <li
+        class="list"
+        :class="{ active: navbar.actualPath === 'register' }"
+        v-if="userStore.userData"
+      >
         <router-link to="/register">
-          <span class="icon"><font-awesome-icon icon="fa-solid fa-user-plus" /></span>
-          <span class="list">Register</span>
+          <span class="icon"
+            ><font-awesome-icon icon="fa-solid fa-user-plus" class="icon-icon"
+          /></span>
+          <span class="title">Register</span>
         </router-link>
       </li>
-      <li class="list" v-if="userStore.userData">
+      <li
+        class="list"
+        :class="{ active: navbar.actualPath === 'carrito' }"
+        v-if="userStore.userData"
+      >
         <router-link to="/chart"
-          ><span class="icon"><font-awesome-icon icon="fa-solid fa-cart-shopping" /></span>
-          <span class="list">Carrito</span>
+          ><span class="icon"
+            ><font-awesome-icon
+              icon="fa-solid fa-cart-shopping"
+              class="icon-icon"
+          /></span>
+          <span class="title">Carrito</span>
         </router-link>
-      </li>
-      <li class="list" v-if="userStore.userData">
-        <button class="underline w-3" @click="userStore.logoutUser" v-if="userStore.userData">
-      Logout
-    </button>
       </li>
     </ul>
   </div>
+  <button
+    class="underline w-3"
+    @click="userStore.logoutUser"
+    v-if="userStore.userData"
+  >
+    Logout
+  </button>
   <div v-else>loading user...</div>
 </template>
 
 <script setup>
 import { userUserStore } from "../../stores/userStore";
+import { useNavbar } from "../../stores/navbar";
+import { onMounted, watch } from "vue";
+import { useRoute } from "vue-router";
+
 const userStore = userUserStore();
+const navbar = useNavbar();
+const routing = useRoute();
+
+onMounted(() => navbar.getLocalStorage());
+
+watch(
+  () => routing.path,
+  () => {
+    switch (routing.path) {
+      case "/":
+        navbar.actualPath = "home";
+        break;
+      case "/login":
+        navbar.actualPath = "login";
+        break;
+      case "/register":
+        navbar.actualPath = "register";
+        break;
+      case "/chart":
+        navbar.actualPath = "carrito";
+        break;
+    }
+    navbar.setLocalStorage();
+  }
+);
 </script>
 
 <style scoped>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.navigation {
+  position: relative;
+  height: 500px;
+  width: 70px;
+  background-color: #2b343b;
+  box-shadow: 10px 0 0 #4187f6;
+  border-left: 10px solid #2b343b;
+  overflow-x: hidden;
+  transition: width 0.5s;
+}
+
+.navigation:hover {
+  width: 300px;
+}
+
+.navigation ul {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding-left: 5px;
+  padding-top: 40px;
+}
+
+.navigation ul li {
+  position: relative;
+  list-style: none;
+  width: 100%;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+.navigation ul li.active {
+  background-color: #4187f6;
+}
+
+.navigation ul li.active a::before {
+  content: "";
+  position: absolute;
+  top: -30px;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  background: #2b343b;
+  border-radius: 50%;
+  box-shadow: 15px 15px 0 #4187f6;
+}
+
+.navigation ul li.active a::after {
+  content: "";
+  position: absolute;
+  bottom: -30px;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  background: #2b343b;
+  border-radius: 50%;
+  box-shadow: 15px -15px 0 #4187f6;
+}
+
+.navigation ul li a {
+  position: relative;
+  display: block;
+  width: 100%;
+  display: flex;
+  text-decoration: none;
+  color: white;
+}
+
+.navigation ul li .icon {
+  position: relative;
+  display: block;
+  min-width: 60px;
+  height: 60px;
+  line-height: 65px;
+  text-align: center;
+}
+
+.navigation ul li .icon .icon-icon {
+  position: relative;
+  font-size: 1.5rem;
+  z-index: 1;
+}
+
+.navigation ul li .title {
+  position: relative;
+  display: block;
+  padding-left: 10px;
+  height: 60px;
+  line-height: 60px;
+  white-space: nowrap;
+}
 </style>
