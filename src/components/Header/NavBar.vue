@@ -30,7 +30,7 @@
       <li
         class="list"
         :class="{ active: navbar.actualPath === 'register' }"
-        v-if="userStore.userData"
+        v-if="!userStore.userData"
       >
         <router-link to="/register">
           <span class="icon"
@@ -53,15 +53,32 @@
           <span class="title">Carrito</span>
         </router-link>
       </li>
+      <li
+        class="list"
+        :class="{ active: navbar.actualPath === 'about' }"
+        v-if="userStore.userData"
+      >
+        <router-link to="/about">
+          <span class="icon">
+            <font-awesome-icon icon="fa-solid fa-circle-info" class="icon-icon"/>
+          </span>
+          <span class="title">About</span>
+        </router-link>
+      </li>
+
+      <li class="list">
+        <button
+          @click="userStore.logoutUser"
+          v-if="userStore.userData"
+        >
+          <span class="icon"
+            ><font-awesome-icon icon="fa-solid fa-power-off" class="icon-icon"
+          /></span>
+          <span class="title">Logout</span>
+        </button>
+      </li>
     </ul>
   </div>
-  <button
-    class="underline w-3"
-    @click="userStore.logoutUser"
-    v-if="userStore.userData"
-  >
-    Logout
-  </button>
   <div v-else>loading user...</div>
 </template>
 
@@ -93,6 +110,9 @@ watch(
       case "/chart":
         navbar.actualPath = "carrito";
         break;
+        case "/about":
+        navbar.actualPath = "about";
+        break;
     }
     navbar.setLocalStorage();
   }
@@ -107,7 +127,7 @@ watch(
 }
 .navigation {
   position: relative;
-  height: 500px;
+  height: 100vh;
   width: 70px;
   background-color: #2b343b;
   box-shadow: 10px 0 0 #4187f6;
@@ -117,7 +137,7 @@ watch(
 }
 
 .navigation:hover {
-  width: 300px;
+  width: 200px;
 }
 
 .navigation ul {
@@ -132,6 +152,7 @@ watch(
 .navigation ul li {
   position: relative;
   list-style: none;
+  margin-top: 10px;
   width: 100%;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
@@ -195,5 +216,22 @@ watch(
   height: 60px;
   line-height: 60px;
   white-space: nowrap;
+}
+
+.navigation button{
+  position: relative;
+  display: block;
+  width: 100%;
+  display: flex;
+  text-decoration: none;
+  color: white;
+}
+
+.navigation button:hover{
+  color: rgb(225, 218, 84)
+}
+
+.navigation ul li a:hover{
+  color: rgb(225, 218, 84)
 }
 </style>

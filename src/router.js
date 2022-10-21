@@ -3,6 +3,7 @@ import HomeView from "./views/HomeView.vue";
 import Login from "./views/LoginView.vue";
 import Register from "./views/RegisterView.vue";
 import ChartView from "./views/ChartView.vue"
+import AboutView from './views/AboutView.vue'
 import {userUserStore} from './stores/userStore'
 
 const requireAuth = async(to, from, next) => {
@@ -22,6 +23,7 @@ const routes = [
   { path: "/login", component: Login },
   { path: "/register", component: Register },
   { path: "/chart", component: ChartView, beforeEnter: requireAuth },
+  { path: "/about", component: AboutView },
 ];
 
 const router = createRouter({

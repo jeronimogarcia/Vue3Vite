@@ -34,7 +34,7 @@ export const userUserStore = defineStore("userStore", {
           email,
           password
         );
-        this.userData = { email: user.email, uid: user.uid };
+        // this.userData = { email: user.email, uid: user.uid };
         await addDoc(collection(db, "charts"), {
           cliente: user.uid,
           productos: this.purchases,

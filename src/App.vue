@@ -2,7 +2,6 @@
   <div class="appContainer">
     <div class="navBar">
       <NavBar />
-      <button class="w-30 bg-rose-500">Primary button</button>
     </div>
     <router-view />
   </div>
