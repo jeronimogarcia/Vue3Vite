@@ -3,7 +3,7 @@
     <div>
       <NavBar />
     </div>
-    <div class="ml-64 mr-64">
+    <div class="ml-48 mr-48 pl-14">
       <router-view />
     </div>
   </div>

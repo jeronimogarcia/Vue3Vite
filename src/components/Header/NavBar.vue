@@ -60,17 +60,17 @@
       >
         <router-link to="/about">
           <span class="icon">
-            <font-awesome-icon icon="fa-solid fa-circle-info" class="icon-icon"/>
+            <font-awesome-icon
+              icon="fa-solid fa-circle-info"
+              class="icon-icon"
+            />
           </span>
           <span class="title">About</span>
         </router-link>
       </li>
 
       <li class="list">
-        <button
-          @click="userStore.logoutUser"
-          v-if="userStore.userData"
-        >
+        <button @click="userStore.logoutUser" v-if="userStore.userData">
           <span class="icon"
             ><font-awesome-icon icon="fa-solid fa-power-off" class="icon-icon"
           /></span>
@@ -110,9 +110,11 @@ watch(
       case "/chart":
         navbar.actualPath = "carrito";
         break;
-        case "/about":
+      case "/about":
         navbar.actualPath = "about";
         break;
+      default:
+      navbar.actualPath = "";
     }
     navbar.setLocalStorage();
   }
@@ -219,7 +221,7 @@ watch(
   white-space: nowrap;
 }
 
-.navigation button{
+.navigation button {
   position: relative;
   display: block;
   width: 100%;
@@ -228,11 +230,11 @@ watch(
   color: white;
 }
 
-.navigation button:hover{
-  color: rgb(225, 218, 84)
+.navigation button:hover {
+  color: rgb(225, 218, 84);
 }
 
-.navigation ul li a:hover{
-  color: rgb(225, 218, 84)
+.navigation ul li a:hover {
+  color: rgb(225, 218, 84);
 }
 </style>
