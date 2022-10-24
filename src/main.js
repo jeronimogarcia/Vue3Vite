@@ -12,7 +12,10 @@ import {
   faUserCheck,
   faRightFromBracket,
   faPowerOff,
-  faCircleInfo
+  faCircleInfo,
+  faHourglass,
+  faSackDollar,
+  faUsers
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -22,7 +25,10 @@ library.add(
   faUserCheck,
   faRightFromBracket,
   faPowerOff,
-  faCircleInfo
+  faCircleInfo,
+  faHourglass,
+  faSackDollar,
+  faUsers
 );
 
 import { createPinia } from "pinia";

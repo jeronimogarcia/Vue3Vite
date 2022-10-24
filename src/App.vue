@@ -1,9 +1,11 @@
 <template>
-  <div class="appContainer">
-    <div class="navBar">
+  <div class="flex flex-row justify-center">
+    <div>
       <NavBar />
     </div>
-    <router-view />
+    <div class="ml-64 mr-64">
+      <router-view />
+    </div>
   </div>
 </template>
 
@@ -12,11 +14,4 @@ import NavBar from "./components/Header/NavBar.vue";
 </script>
 
 <style scoped>
-.appContainer {
-  display: flex;
-  flex-direction: row;
-}
-.navBar {
-  width: 400px;
-}
 </style>

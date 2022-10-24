@@ -126,7 +126,8 @@ watch(
   box-sizing: border-box;
 }
 .navigation {
-  position: relative;
+  position: fixed;
+  left: 0;
   height: 100vh;
   width: 70px;
   background-color: #2b343b;
