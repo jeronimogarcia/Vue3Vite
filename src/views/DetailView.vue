@@ -14,7 +14,7 @@
         {{ detailStore.product.description }}
       </p>
     </div>
-    <div class="informationContainer w-2/4 pl-8 pt-3">
+    <div class="informationContainer w-2/4 pl-8 pt-4">
       <h3 class="flex justify-center mb-1 mt-1 text-2xl font-medium">
         Puntuación
       </h3>
@@ -46,7 +46,7 @@
         Características
       </h3>
       <Details :product = detailStore.product></Details>
-      <div>
+      <div class="mt-6">
         <span class="text-lg font-medium pr-1">Stock disponible: </span>
         <span class="text-lg font-medium">{{detailStore.product.quantity}} unidades</span>
       </div>
@@ -80,11 +80,11 @@ onMounted(() => detailStore.getProductOnMounted());
 }
 
 .imageContainer {
-  height: 500px;
+  height: 480px;
 }
 
 .informationContainer {
-  height: 500px;
+  height: 480px;
   border-left: 1px solid #000;
 }
 

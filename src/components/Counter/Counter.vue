@@ -1,24 +1,27 @@
 <template>
-  <div class="flex flex-col items-center mt-10">
+  <div class="flex flex-col items-center mt-6">
     <div class="flex flex-row">
       <p class="text-lg font-medium pr-1">Cantidad:</p>
       <span class="text-lg font-medium pr-4">{{ counter }}</span>
-      <button @click="decrement()">
+      <button class="buttonBoth mr-2" @click="decrement()">
         <font-awesome-icon
-          icon="fa-solid fa-circle-minus"
-          class="pr-2 text-4xl relative bottom-2.5"
+          icon="fa-solid fa-minus"
+          class="pr-2 relative bottom-2.5 iconButton"
         />
       </button>
-      <button @click="increment(product)">
+      <button class="buttonBoth mr-2" @click="increment(product)">
         <font-awesome-icon
-          icon="fa-solid fa-circle-plus"
-          class="pr-2 text-4xl relative bottom-2.5"
+          icon="fa-solid fa-plus"
+          class="pr-2 relative bottom-2.5 iconButton"
         />
       </button>
     </div>
-    <div>
-      <button @click="productStore.addProductsToChart(product, counter)">
-        Agregar al Carrito
+    <div class="mt-2">
+      <button
+        class="text-lg font-medium buttonStyle"
+        @click="productStore.addProductsToChart(product, counter)"
+      >
+        Agregar al carrito
       </button>
     </div>
   </div>
@@ -26,7 +29,7 @@
 
 <script setup>
 import { ref } from "vue";
-import { useProductsStore } from '../../stores/products';
+import { useProductsStore } from "../../stores/products";
 
 defineProps({
   product: Object,
@@ -44,4 +47,37 @@ const decrement = () => {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.buttonStyle {
+  width: 300px;
+  background-color: #4187f6;
+  padding: 5px 0px 5px 0px;
+  border-radius: 15px;
+  color: white;
+}
+.buttonStyle:hover {
+  background-color: black;
+  color: yellow;
+}
+
+.iconButton {
+  position: relative;
+  top: 1.5px;
+  left: 4px;
+  font-size: 1.25rem;
+}
+
+.buttonBoth {
+  border: 2px solid black;
+  position: relative;
+  bottom: 6px;
+  border-radius: 16px;
+}
+
+.buttonBoth:hover {
+  background-color: black;
+}
+.iconButton:hover {
+  color: white;
+}
+</style>

@@ -30,7 +30,7 @@ export const useProductsStore = defineStore("products", {
     },
     async actualizarCarrito() {
       try {
-        console.log(userUserStore().docId)
+        console.log(userUserStore().docId);
         const docRef = doc(db, "charts", userUserStore().docId);
         await updateDoc(docRef, {
           productos: [...userUserStore().purchases],
@@ -40,8 +40,14 @@ export const useProductsStore = defineStore("products", {
       }
     },
     addProductsToChart(product, counter) {
-      userUserStore().purchases.push({...product, bought: counter});
-      console.log(userUserStore().purchases)
+      const findProductIndex = userUserStore().purchases.findIndex(
+        (productFind) => product.id === productFind.id
+      );
+      if (findProductIndex !== -1) {
+        userUserStore().purchases[findProductIndex].bought = counter;
+      } else {
+        userUserStore().purchases.push({ ...product, bought: counter });
+      }
       this.actualizarCarrito();
       this.actualizarLocalStorage();
     },
