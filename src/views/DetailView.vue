@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-10 mt-10 flex justify-center">
+  <div class="mb-16 mt-10 flex justify-center">
     <h1 class="font-semibold text-6xl">Detalle del Producto</h1>
   </div>
   <article class="flex justify-center articleContainer">

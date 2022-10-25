@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center mt-6">
+  <div class="flex flex-col items-center mt-6" v-if="chart">
     <div class="flex flex-row">
       <p class="text-lg font-medium pr-1">Cantidad:</p>
       <span class="text-lg font-medium pr-4">{{ counter }}</span>
@@ -19,11 +19,16 @@
     <div class="mt-2">
       <button
         class="text-lg font-medium buttonStyle"
-        @click="productStore.addProductsToChart(product, counter)"
+        @click="goToChart(product, counter)"
       >
         Agregar al carrito
       </button>
     </div>
+  </div>
+  <div class="flex flex-col items-center mt-6" v-else>
+    <router-link to="/chart">
+      <button class="text-lg font-medium buttonStyle" >Ir al carrito</button>
+    </router-link>
   </div>
 </template>
 
@@ -37,6 +42,12 @@ defineProps({
 
 const productStore = useProductsStore();
 const counter = ref(1);
+const chart = ref(true);
+
+const goToChart = (product, counter) => {
+  chart.value = !chart.value;
+  productStore.addProductsToChart(product, counter);
+};
 const increment = (p) => {
   if (counter.value < p.quantity) {
     counter.value++;
