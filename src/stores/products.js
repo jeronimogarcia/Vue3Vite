@@ -30,6 +30,7 @@ export const useProductsStore = defineStore("products", {
     },
     async actualizarCarrito() {
       try {
+        console.log(userUserStore().docId)
         const docRef = doc(db, "charts", userUserStore().docId);
         await updateDoc(docRef, {
           productos: [...userUserStore().purchases],
@@ -38,8 +39,9 @@ export const useProductsStore = defineStore("products", {
         console.log(error);
       }
     },
-    addProductsToChart(product) {
-      userUserStore().purchases.push(product);
+    addProductsToChart(product, counter) {
+      userUserStore().purchases.push({...product, bought: counter});
+      console.log(userUserStore().purchases)
       this.actualizarCarrito();
       this.actualizarLocalStorage();
     },

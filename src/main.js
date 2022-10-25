@@ -15,7 +15,10 @@ import {
   faCircleInfo,
   faHourglass,
   faSackDollar,
-  faUsers
+  faUsers,
+  faStar,
+  faCirclePlus,
+  faCircleMinus
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -28,7 +31,10 @@ library.add(
   faCircleInfo,
   faHourglass,
   faSackDollar,
-  faUsers
+  faUsers,
+  faStar,
+  faCirclePlus,
+  faCircleMinus
 );
 
 import { createPinia } from "pinia";
