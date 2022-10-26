@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHashHistory } from "vue-router";
 import HomeView from "./views/HomeView.vue";
 import Login from "./views/LoginView.vue";
 import Register from "./views/RegisterView.vue";
@@ -30,7 +30,7 @@ const routes = [
 
 const router = createRouter({
   routes,
-  history: createWebHistory(),
+  history: createWebHashHistory(),
 });
 
 export default router;
