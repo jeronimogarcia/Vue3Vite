@@ -30,7 +30,6 @@ export const useProductsStore = defineStore("products", {
     },
     async actualizarCarrito() {
       try {
-        console.log(userUserStore().docId);
         const docRef = doc(db, "charts", userUserStore().docId);
         await updateDoc(docRef, {
           productos: [...userUserStore().purchases],

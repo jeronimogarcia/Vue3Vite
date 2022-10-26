@@ -20,7 +20,8 @@ import {
   faCirclePlus,
   faCircleMinus,
   faPlus,
-  faMinus
+  faMinus,
+  faSquareXmark
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -38,7 +39,8 @@ library.add(
   faCirclePlus,
   faCircleMinus,
   faPlus,
-  faMinus
+  faMinus,
+  faSquareXmark
 );
 
 import { createPinia } from "pinia";

@@ -6,4 +6,5 @@ body{
     background-image: url(../src/assets/colorShapes2.svg);
     background-repeat: no-repeat;
     background-size: cover;
+    background-attachment: fixed;
 }
