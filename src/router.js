@@ -24,7 +24,7 @@ const routes = [
   { path: "/login", component: Login },
   { path: "/register", component: Register },
   { path: "/chart", component: ChartView, beforeEnter: requireAuth },
-  { path: "/about", component: AboutView },
+  { path: "/about", component: AboutView,beforeEnter: requireAuth },
   { path: "/product/:id", component: DetailView, beforeEnter: requireAuth },
 ];
 
