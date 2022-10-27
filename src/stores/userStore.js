@@ -25,6 +25,7 @@ export const userUserStore = defineStore("userStore", {
     purchases: [],
     docId: "",
     loginFailed: false,
+    registerFailed: false
   }),
   actions: {
     async registerUser(email, password) {
@@ -42,6 +43,7 @@ export const userUserStore = defineStore("userStore", {
         router.push("/login");
       } catch (error) {
         console.log(error);
+        this.registerFailed = true
       } finally {
         this.loadingUser = false;
       }

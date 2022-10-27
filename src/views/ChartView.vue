@@ -56,16 +56,16 @@
       </table>
     </div>
   </div>
-  <div v-if="userStore.purchases == 0">
-    <h1>No hay Productos en el Carrito</h1>
+  <div class="flex flex-col items-center" v-if="userStore.purchases == 0">
+    <h2 class="mb-4 text-2xl font-medium">No hay Productos en el Carrito</h2>
     <router-link to="/"
-      ><button class="btn btn-success">Volver al Home</button></router-link
+      ><button  class="buttonStyle">Volver al Home</button></router-link
     >
   </div>
 </template>
 
 <script setup>
-import { onMounted, computed } from "vue";
+import { onMounted } from "vue";
 import { userUserStore } from "../stores/userStore";
 const userStore = userUserStore();
 onMounted(() => userStore.getLocalStorage());
@@ -123,5 +123,18 @@ table th {
 .deleteStyle {
   padding-right: 0px;
   text-align: center;
+}
+
+.buttonStyle {
+  width: 300px;
+  background-color: #4187f6;
+  padding: 5px 0px 5px 0px;
+  border-radius: 15px;
+  color: white;
+}
+
+.buttonStyle:hover {
+  background-color: black;
+  color: yellow;
 }
 </style>

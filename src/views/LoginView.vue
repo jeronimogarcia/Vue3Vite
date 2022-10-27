@@ -53,7 +53,7 @@
 <script setup>
 import { reactive } from "vue";
 import { useVuelidate } from "@vuelidate/core";
-import { required, email } from "@vuelidate/validators";
+import { required, email, helpers } from "@vuelidate/validators";
 import { userUserStore } from "../stores/userStore";
 
 const userStore = userUserStore();
@@ -64,8 +64,13 @@ const state = reactive({
 });
 
 const rules = {
-  email: { required, email },
-  password: { required },
+  email: {
+    required: helpers.withMessage("Este campo es obligatorio", required),
+    email: helpers.withMessage("Debe ser formato de email", email),
+  },
+  password: {
+    required: helpers.withMessage("Este campo es obligatorio", required),
+  },
 };
 
 const v$ = useVuelidate(rules, state);
