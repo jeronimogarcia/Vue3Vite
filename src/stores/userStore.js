@@ -130,8 +130,6 @@ export const userUserStore = defineStore("userStore", {
         const docRef = doc(db, "compras", ticket);
         const docSnap = await getDoc(docRef);
         if (docSnap) {
-          console.log(docSnap.data())
-          console.log(docSnap.data().productos)
           this.ticketList = docSnap.data().productos
         }
       } catch (error) {
