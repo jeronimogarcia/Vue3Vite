@@ -9,7 +9,9 @@ import {
   addDoc,
   query,
   getDocs,
+  doc,
   where,
+  getDoc,
 } from "firebase/firestore/lite";
 import { db } from "../FirebaseConfig/firebaseConfig";
 import { defineStore } from "pinia";
@@ -23,10 +25,11 @@ export const userUserStore = defineStore("userStore", {
     loadingUser: false,
     loadingSession: false,
     purchases: [],
-    docId: '',
+    docId: "",
     purchasedId: "",
     loginFailed: false,
-    registerFailed: false
+    registerFailed: false,
+    ticketList: [],
   }),
   actions: {
     async registerUser(email, password) {
@@ -44,7 +47,7 @@ export const userUserStore = defineStore("userStore", {
         router.push("/login");
       } catch (error) {
         console.log(error);
-        this.registerFailed = true
+        this.registerFailed = true;
       } finally {
         this.loadingUser = false;
       }
@@ -71,7 +74,7 @@ export const userUserStore = defineStore("userStore", {
         router.push("/");
       } catch (error) {
         console.log(error);
-        this.loginFailed = true
+        this.loginFailed = true;
       } finally {
         this.loadingUser = false;
       }
@@ -103,25 +106,39 @@ export const userUserStore = defineStore("userStore", {
         console.log(error);
       }
     },
-    async setCompra(email, phone){
+    async setCompra(email, phone) {
       try {
-        const docRef =  await addDoc(collection(db, "compras"), {
+        const docRef = await addDoc(collection(db, "compras"), {
           cliente: email,
           telefono: phone,
           productos: this.purchases,
         });
-        this.purchasedId = docRef.id
+        this.purchasedId = docRef.id;
       } catch (error) {
         console.log(error);
       } finally {
-        this.cleanPurchases()
+        this.cleanPurchases();
         window.localStorage.setItem(
           `listaCarrito`,
           JSON.stringify(this.purchases)
         );
-        useProductsStore().actualizarCarrito()
+        useProductsStore().actualizarCarrito();
       }
     },
+    async getTicketLista(ticket) {
+      try {
+        const docRef = doc(db, "compras", ticket);
+        const docSnap = await getDoc(docRef);
+        if (docSnap) {
+          console.log(docSnap.data())
+          console.log(docSnap.data().productos)
+          this.ticketList = docSnap.data().productos
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
     currentUser() {
       return new Promise((resolve, reject) => {
         const unsuscribe = onAuthStateChanged(
@@ -161,8 +178,8 @@ export const userUserStore = defineStore("userStore", {
     cleanLocalStorage() {
       localStorage.clear();
     },
-    cleanPurchases(){
-      this.purchases = []
+    cleanPurchases() {
+      this.purchases = [];
     },
     deleteProduct(index) {
       this.purchases.splice(index, 1);
