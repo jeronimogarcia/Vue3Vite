@@ -5,6 +5,8 @@ import Register from "./views/RegisterView.vue";
 import ChartView from "./views/ChartView.vue"
 import AboutView from './views/AboutView.vue'
 import DetailView from './views/DetailView.vue'
+import TicketsView from './views/TicketsView.vue'
+import CheckoutView from './views/CheckoutView.vue'
 import {userUserStore} from './stores/userStore'
 
 const requireAuth = async(to, from, next) => {
@@ -26,6 +28,8 @@ const routes = [
   { path: "/chart", component: ChartView, beforeEnter: requireAuth },
   { path: "/about", component: AboutView,beforeEnter: requireAuth },
   { path: "/product/:id", component: DetailView, beforeEnter: requireAuth },
+  { path: "/checkout", component: CheckoutView, beforeEnter: requireAuth },
+  { path: "/tickets", component: TicketsView,beforeEnter: requireAuth },
 ];
 
 const router = createRouter({

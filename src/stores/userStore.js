@@ -23,7 +23,8 @@ export const userUserStore = defineStore("userStore", {
     loadingUser: false,
     loadingSession: false,
     purchases: [],
-    docId: "",
+    docId: '',
+    purchasedId: "",
     loginFailed: false,
     registerFailed: false
   }),
@@ -102,6 +103,25 @@ export const userUserStore = defineStore("userStore", {
         console.log(error);
       }
     },
+    async setCompra(email, phone){
+      try {
+        const docRef =  await addDoc(collection(db, "compras"), {
+          cliente: email,
+          telefono: phone,
+          productos: this.purchases,
+        });
+        this.purchasedId = docRef.id
+      } catch (error) {
+        console.log(error);
+      } finally {
+        this.cleanPurchases()
+        window.localStorage.setItem(
+          `listaCarrito`,
+          JSON.stringify(this.purchases)
+        );
+        useProductsStore().actualizarCarrito()
+      }
+    },
     currentUser() {
       return new Promise((resolve, reject) => {
         const unsuscribe = onAuthStateChanged(
@@ -140,6 +160,9 @@ export const userUserStore = defineStore("userStore", {
     },
     cleanLocalStorage() {
       localStorage.clear();
+    },
+    cleanPurchases(){
+      this.purchases = []
     },
     deleteProduct(index) {
       this.purchases.splice(index, 1);

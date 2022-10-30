@@ -62,6 +62,13 @@
       ><button  class="buttonStyle">Volver al Home</button></router-link
     >
   </div>
+  <div class="flex flex-col items-center" v-if="userStore.purchases.length > 0">
+    <h2 class="mb-4 text-2xl font-medium">Finalizar Compra</h2>
+    <router-link to="/checkout"
+      ><button  class="buttonStyle">Ir a Checkout</button></router-link
+    >
+  </div>
+
 </template>
 
 <script setup>

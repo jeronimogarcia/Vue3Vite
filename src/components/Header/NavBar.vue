@@ -39,6 +39,7 @@
           <span class="title">Register</span>
         </router-link>
       </li>
+
       <li
         class="list"
         :class="{ active: navbar.actualPath === 'carrito' }"
@@ -53,6 +54,31 @@
           <span class="title">Carrito</span>
         </router-link>
       </li>
+
+      <li
+        class="list"
+        :class="{ active: navbar.actualPath === 'checkout' }"
+        v-if="userStore.userData | userStore.purchases.length != 0"
+      >
+        <router-link to="/checkout"
+          ><span class="icon"
+            ><font-awesome-icon icon="fa-solid fa-credit-card" class="icon-icon"/></span>
+          <span class="title">Checkout</span>
+        </router-link>
+      </li>
+
+      <li
+        class="list"
+        :class="{ active: navbar.actualPath === 'tickets' }"
+        v-if="userStore.userData"
+      >
+        <router-link to="/tickets"
+          ><span class="icon"
+            ><font-awesome-icon icon="fa-solid fa-clipboard-check" class="icon-icon"/></span>
+          <span class="title">Tickets</span>
+        </router-link>
+      </li>
+
       <li
         class="list"
         :class="{ active: navbar.actualPath === 'about' }"
@@ -109,6 +135,12 @@ watch(
         break;
       case "/chart":
         navbar.actualPath = "carrito";
+        break;
+      case "/checkout":
+        navbar.actualPath = "checkout";
+        break;
+      case "/tickets":
+        navbar.actualPath = "tickets";
         break;
       case "/about":
         navbar.actualPath = "about";
