@@ -76,4 +76,8 @@ onMounted(() => productsStore.getProducts());
   height: 280px;
   max-width: 400px;
 }
+
+img{
+  border-bottom: 1px solid #31303080;
+}
 </style>
