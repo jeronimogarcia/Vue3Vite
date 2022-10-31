@@ -137,7 +137,6 @@ export const userUserStore = defineStore("userStore", {
         console.log(error);
       }
     },
-
     currentUser() {
       return new Promise((resolve, reject) => {
         const unsuscribe = onAuthStateChanged(

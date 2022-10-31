@@ -105,7 +105,6 @@
       </li>
     </ul>
   </div>
-  <div v-else>loading user...</div>
 </template>
 
 <script setup>
