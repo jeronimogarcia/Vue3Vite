@@ -47,13 +47,18 @@
         {{ error.$message }}
       </span>
 
-      <button
-        class="text-left text-lg mt-10 mb-2 text-white buttonStyle"
-        type="submit"
-        :disabled="userStore.loadingUser"
-      >
-        Registrar
-      </button>
+      <div class="flex flex-row">
+        <button
+          class="text-left text-lg mt-10 mr-4 text-white buttonStyle"
+          type="submit"
+          :class="{ disable: userStore.isLoading }"
+          :disabled="userStore.isLoading"
+        >
+          Registrar
+        </button>
+        <SpinnerVue class="mt-10" v-if="userStore.isLoading" />
+      </div>
+
       <span
         class="errors"
         v-if="
@@ -82,6 +87,7 @@ import {
   helpers,
 } from "@vuelidate/validators";
 import { userUserStore } from "../stores/userStore";
+import SpinnerVue from "../components/Spinner/Spinner.vue";
 
 const userStore = userUserStore();
 
@@ -129,21 +135,23 @@ const handleSubmit = async () => {
   width: 600px;
   background-color: #2b343b;
 }
-
 .buttonStyle {
   display: flex;
   justify-content: center;
   background-color: #4187f6;
-  width: 80px;
+  width: 100px;
   border-radius: 6px;
+  height: 30px;
 }
-
 .buttonStyle:hover {
   color: yellow;
 }
-
 .errors {
   color: red;
   margin-top: 10px;
+}
+
+.disable {
+  opacity: 0.3;
 }
 </style>

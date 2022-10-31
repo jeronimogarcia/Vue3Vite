@@ -29,12 +29,18 @@
       >
         {{ error.$message }}
       </span>
-      <button
-        class="text-left text-lg mt-10 mb-2 text-white buttonStyle"
-        type="submit"
-      >
-        Login
-      </button>
+      <div class="flex flex-row">
+        <button
+          class="text-left text-lg mt-10 mr-4 text-white buttonStyle"
+          :class="{ disable: userStore.isLoading }"
+          :disabled="userStore.isLoading"
+          type="submit"
+        >
+          Login
+        </button>
+        <SpinnerVue class="mt-10" v-if="userStore.isLoading" />
+      </div>
+      <b-spinner label="Spinning"></b-spinner>
       <span
         class="errors"
         v-if="
@@ -55,6 +61,7 @@ import { reactive } from "vue";
 import { useVuelidate } from "@vuelidate/core";
 import { required, email, helpers } from "@vuelidate/validators";
 import { userUserStore } from "../stores/userStore";
+import SpinnerVue from "../components/Spinner/Spinner.vue";
 
 const userStore = userUserStore();
 
@@ -95,6 +102,7 @@ const handleSubmit = async () => {
   background-color: #4187f6;
   width: 80px;
   border-radius: 6px;
+  height: 30px;
 }
 
 .buttonStyle:hover {
@@ -104,5 +112,9 @@ const handleSubmit = async () => {
 .errors {
   color: red;
   margin-top: 10px;
+}
+
+.disable {
+  opacity: 0.3;
 }
 </style>

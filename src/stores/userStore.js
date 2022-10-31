@@ -24,6 +24,7 @@ export const userUserStore = defineStore("userStore", {
     userData: null,
     loadingUser: false,
     loadingSession: false,
+    isLoading: false,
     purchases: [],
     docId: "",
     purchasedId: "",
@@ -33,7 +34,7 @@ export const userUserStore = defineStore("userStore", {
   }),
   actions: {
     async registerUser(email, password) {
-      this.loadingUser = true;
+      this.isLoading = true;
       try {
         const { user } = await createUserWithEmailAndPassword(
           auth,
@@ -49,11 +50,11 @@ export const userUserStore = defineStore("userStore", {
         console.log(error);
         this.registerFailed = true;
       } finally {
-        this.loadingUser = false;
+        this.isLoading = false;
       }
     },
     async loginUser(email, password) {
-      this.loadingUser = true;
+      this.isLoading = true;
       try {
         const { user } = await signInWithEmailAndPassword(
           auth,
@@ -76,7 +77,7 @@ export const userUserStore = defineStore("userStore", {
         console.log(error);
         this.loginFailed = true;
       } finally {
-        this.loadingUser = false;
+        this.isLoading = false;
       }
     },
     async logoutUser() {
@@ -130,7 +131,7 @@ export const userUserStore = defineStore("userStore", {
         const docRef = doc(db, "compras", ticket);
         const docSnap = await getDoc(docRef);
         if (docSnap) {
-          this.ticketList = docSnap.data().productos
+          this.ticketList = docSnap.data().productos;
         }
       } catch (error) {
         console.log(error);
