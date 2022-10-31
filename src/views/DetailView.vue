@@ -53,6 +53,12 @@
       <Counter :product = detailStore.product></Counter>
     </div>
   </article>
+
+  <div class="flex justify-center mt-10">
+    <router-link to="/"
+        ><button  class="buttonStyle">Volver al Home</button></router-link
+      >
+  </div>
 </template>
 
 <script setup>
@@ -94,5 +100,21 @@ onMounted(() => detailStore.getProductOnMounted());
 
 .stars{
     color: orange;
+}
+
+.buttonStyle {
+  width: 300px;
+  background-color: #4187f6;
+  padding: 5px 0px 5px 0px;
+  border-radius: 15px;
+  color: white;
+  font-weight: 500;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.buttonStyle:hover {
+  background-color: black;
+  color: yellow;
 }
 </style>

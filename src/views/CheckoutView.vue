@@ -122,5 +122,8 @@ const handleSubmit = async () => {
   padding: 5px 0px 5px 0px;
   border-radius: 15px;
   color: white;
+  font-weight: 500;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
 }
 </style>
