@@ -2,10 +2,10 @@
   <div class="mb-10 mt-10 flex justify-center">
     <h1 class="font-semibold text-6xl">Nuestras Delicias</h1>
   </div>
-  <div class="flex flex-wrap flex-row justify-center">
+  <div class="flex flex-wrap flex-row justify-center ">
     <div
-      class="flex flex-col background box-border"
-      v-for="product in productsStore.products"
+      class="flex flex-col background box-border relative"
+      v-for="(product, index) in productsStore.products"
       :key="product.id"
     >
       <div class="min-w-max max-h-72">
@@ -20,7 +20,7 @@
           {{ product.title }}
         </h3>
       </div>
-      <Details :product = product ></Details> 
+      <Details :product="product"></Details>
       <div>
         <p class="text-lg font-normal leading-tight ml-8 mr-8">
           {{ product.description }}
@@ -28,8 +28,11 @@
       </div>
       <div class="mt-4 flex justify-center backgroundButton">
         <router-link v-bind:to="'/product/' + product.id"
-          ><button class="buttonStyle" >Detalle</button></router-link
+          ><button class="buttonStyle">Detalle</button></router-link
         >
+      </div>
+      <div v-if="product.id > 10">
+        <button class="buttonStyle eliminate" @click="userStore.deleteProductDatabase(product.id, index)">Eliminar</button>
       </div>
     </div>
   </div>
@@ -39,8 +42,11 @@
 import { onMounted } from "vue";
 import Details from "../components/Details/Details.vue";
 import { useProductsStore } from "../stores/products";
+import { userUserStore } from "../stores/userStore";
 
 const productsStore = useProductsStore();
+const userStore = userUserStore();
+
 onMounted(() => productsStore.getProducts());
 </script>
 
@@ -77,7 +83,12 @@ onMounted(() => productsStore.getProducts());
   max-width: 400px;
 }
 
-img{
+img {
   border-bottom: 1px solid #31303080;
+}
+
+.eliminate {
+  position: absolute;
+  top: 0px;
 }
 </style>

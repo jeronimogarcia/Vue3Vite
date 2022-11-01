@@ -38,9 +38,8 @@
         >
           Login
         </button>
-        <SpinnerVue class="mt-10" v-if="userStore.isLoading" />
+        <Spinner class="mt-10" v-if="userStore.isLoading" />
       </div>
-      <b-spinner label="Spinning"></b-spinner>
       <span
         class="errors"
         v-if="
@@ -61,13 +60,13 @@ import { reactive } from "vue";
 import { useVuelidate } from "@vuelidate/core";
 import { required, email, helpers } from "@vuelidate/validators";
 import { userUserStore } from "../stores/userStore";
-import SpinnerVue from "../components/Spinner/Spinner.vue";
+import Spinner from "../components/Spinner/Spinner.vue";
 
 const userStore = userUserStore();
 
 const state = reactive({
-  email: "jero_garcia23@hotmail.com",
-  password: "2222222222",
+  email: "administrador@administrador.com",
+  password: "administrador",
 });
 
 const rules = {

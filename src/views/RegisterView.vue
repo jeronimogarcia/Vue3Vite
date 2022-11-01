@@ -56,7 +56,7 @@
         >
           Registrar
         </button>
-        <SpinnerVue class="mt-10" v-if="userStore.isLoading" />
+        <Spinner class="mt-10" v-if="userStore.isLoading" />
       </div>
 
       <span
@@ -87,7 +87,7 @@ import {
   helpers,
 } from "@vuelidate/validators";
 import { userUserStore } from "../stores/userStore";
-import SpinnerVue from "../components/Spinner/Spinner.vue";
+import Spinner from "../components/Spinner/Spinner.vue";
 
 const userStore = userUserStore();
 
@@ -150,7 +150,6 @@ const handleSubmit = async () => {
   color: red;
   margin-top: 10px;
 }
-
 .disable {
   opacity: 0.3;
 }

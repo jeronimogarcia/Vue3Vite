@@ -58,11 +58,14 @@
       <li
         class="list"
         :class="{ active: navbar.actualPath === 'checkout' }"
-        v-if="userStore.userData | userStore.purchases.length != 0"
+        v-if="userStore.userData | (userStore.purchases.length != 0)"
       >
         <router-link to="/checkout"
           ><span class="icon"
-            ><font-awesome-icon icon="fa-solid fa-credit-card" class="icon-icon"/></span>
+            ><font-awesome-icon
+              icon="fa-solid fa-credit-card"
+              class="icon-icon"
+          /></span>
           <span class="title">Checkout</span>
         </router-link>
       </li>
@@ -74,8 +77,24 @@
       >
         <router-link to="/tickets"
           ><span class="icon"
-            ><font-awesome-icon icon="fa-solid fa-clipboard-check" class="icon-icon"/></span>
+            ><font-awesome-icon
+              icon="fa-solid fa-clipboard-check"
+              class="icon-icon"
+          /></span>
           <span class="title">Tickets</span>
+        </router-link>
+      </li>
+
+      <li
+        class="list"
+        :class="{ active: navbar.actualPath === 'addProduct' }"
+        v-if="userStore.userData && userStore.isAdmin"
+      >
+        <router-link to="/addProduct"
+          ><span class="icon"
+            ><font-awesome-icon icon="fa-solid fa-plus" class="icon-icon"
+          /></span>
+          <span class="title">Agregar</span>
         </router-link>
       </li>
 
@@ -141,11 +160,14 @@ watch(
       case "/tickets":
         navbar.actualPath = "tickets";
         break;
+      case "/addProduct":
+        navbar.actualPath = "addProduct";
+        break;
       case "/about":
         navbar.actualPath = "about";
         break;
       default:
-      navbar.actualPath = "";
+        navbar.actualPath = "";
     }
     navbar.setLocalStorage();
   }
