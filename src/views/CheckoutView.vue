@@ -65,8 +65,8 @@ onMounted(() => userStore.getLocalStorage());
 const userStore = userUserStore();
 
 const state = reactive({
-  email: "pepe@hotmail.com",
-  phone: "222222222222",
+  email: "",
+  phone: "",
 });
 
 const rules = {
