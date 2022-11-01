@@ -74,7 +74,7 @@ export const userUserStore = defineStore("userStore", {
           this.purchases = doc.data().productos;
         });
         console.log(auth.currentUser.uid);
-        if (auth.currentUser.uid == "V6b3yz2xE6bgd12K0Ykqg6zP7l93") {
+        if (auth.currentUser.uid == "vTXSQuHgUwNcp9xBk2eO4ngVBEH3") {
           this.isAdmin = true;
         }
         console.log(this.isAdmin);
