@@ -65,8 +65,8 @@ import Spinner from "../components/Spinner/Spinner.vue";
 const userStore = userUserStore();
 
 const state = reactive({
-  email: "administrador@administrador.com",
-  password: "administrador",
+  email: "",
+  password: "",
 });
 
 const rules = {
